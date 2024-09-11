@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { Home, Login, Registration, Leads, Profile } from "./pages"
 
 function App() {
 
@@ -6,11 +7,11 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<>Login</>} />
-          <Route path="/cadastro" element={<>Cadastro</>} />
-          <Route path="/home" element={<>Home</>} />
-          <Route path="/leads" element={<>Leads</>} />
-          <Route path="/perfil" element={<>Perfil</>} />
+          <Route path="/" element={<Login/>} />
+          <Route path="/cadastro" element={<Registration/>} />
+          <Route path="/home" element={<Home/>} />
+          <Route path="/leads" element={<Leads/>} />
+          <Route path="/perfil" element={<Profile/>} />
         </Routes>
       </Router>
     </>
