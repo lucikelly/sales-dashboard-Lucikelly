@@ -10,4 +10,5 @@ export * from './decodedJwt'
 export * from './highlightsData'
 export * from './starsData'
 export * from './newsData'
+export * from './profileData'
 
