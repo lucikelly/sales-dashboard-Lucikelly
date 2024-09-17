@@ -7,3 +7,7 @@ export * from './loginData'
 export * from './theme'
 export * from './typographies'
 export * from './decodedJwt'
+export * from './highlightsData'
+export * from './starsData'
+export * from './newsData'
+
