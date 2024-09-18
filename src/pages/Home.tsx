@@ -12,6 +12,8 @@ import { Container, Grid } from "@mui/material"
 import { currencyConverter, highlightsTextConvert } from "@/utils"
 import { useGet } from "@/hooks"
 import { HighlightsData, StarsData, NewsData, CustomChartProps } from "@/types"
+import { Link } from 'react-router-dom'
+
 
 function Home () {
   const {
@@ -51,7 +53,7 @@ function Home () {
   return (
     <>
       <Header />
-      <Container className='mb-2' maxWidth="lg">
+      <Container className="mb-2" maxWidth="lg">
         <Grid container spacing={4}>
           {!highlightsError && (
             <>
@@ -114,13 +116,18 @@ function Home () {
                   }
                 >
                   {!highlightsLoading && highlightsData && (
-                    <>
-                      <StyledH2 className="mb-1"> Leads contactados </StyledH2>
-                      <StyledH3 className="mb-1" size={40} lineheight={40}>
-                        {highlightsData[2].value}
-                      </StyledH3>
-                      <StyledSpan>{highlightsData[2].subtitle}</StyledSpan>
-                    </>
+                   
+                      <Link to="/leads">
+                        <StyledH2 className="mb-1">
+                          {' '}
+                          Leads contactados{' '}
+                        </StyledH2>
+                        <StyledH3 className="mb-1" size={40} lineheight={40}>
+                          {highlightsData[2].value}
+                        </StyledH3>
+                        <StyledSpan>{highlightsData[2].subtitle}</StyledSpan>
+                      </Link>
+                   
                   )}
                 </CardComponent>
               </Grid>
