@@ -1,35 +1,45 @@
-import { useState, useEffect } from "react";
-import { InputProps } from "@/types";
+import { useState, useEffect } from 'react'
+import { InputProps } from '@/types'
 
-export const useFormValidation = (inputs:InputProps[]) => {
+export const useFormValidation = (inputs: InputProps[]) => {
+  const [formValues, setFormValues] = useState(
+    inputs.map((input) => input.value || '')
+  )
+  const [formValid, setFormValid] = useState(false)
 
-  const [formValues, setFormValues] = useState( inputs.map((input)=> input.value || ''))
-  const [ formValid, setFormValid] = useState(false)
-
-  useEffect(()=>{
-    const allFieldsValid = inputs.every((input, index)=>{
+  useEffect(() => {
+    const allFieldsValid = inputs.every((input, index) => {
       const value = formValues[index]
-      if(input.required && !value) {
+      if (input.required && !value) {
         return false
       }
-      if(input.type === 'email') {
+      if (input.type === 'email') {
         return /\S+@\S+\.\S+/.test(String(formValues[index]))
       }
       if (input.type === 'password') {
-         return String(formValues[index]).length > 7
+        const password = String(value)
+        const hasCorrectLenght = password.length >= 8 && password.length <= 16
+        const hasUppercaseLetter = /[A-Z]/.test(password)
+        const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password)
+        const hasNumber = /\d/.test(password)
+        return (
+          hasCorrectLenght &&
+          hasUppercaseLetter &&
+          hasSpecialCharacter &&
+          hasNumber
+        )
       }
       return true
     })
     setFormValid(allFieldsValid)
   }, [formValues, inputs])
 
-
   const handleChange = (index: number, value: string) => {
-    setFormValues ((prevValues)=>{
+    setFormValues((prevValues) => {
       const newValues = [...prevValues]
       newValues[index] = value
       return newValues
     })
   }
-  return { formValues, formValid, handleChange}
+  return { formValues, formValid, handleChange }
 }
