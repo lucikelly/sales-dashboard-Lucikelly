@@ -11,8 +11,16 @@ import { useFormValidation, usePost } from "@/hooks";
 
 import { DecodedJWT, MessageProps, LoginData, LoginPostData } from "@/types";
 
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux'
+
+import { Link } from 'react-router-dom'
+
+
 function Login () {
   const navigate = useNavigate()
+  const { email, message } = useSelector((state: RootState) => state.createProfile)
+
   const inputs = [
     { type: 'email', placeholder: 'Email'},
     { type: 'password', placeholder: 'Senha'},
@@ -22,7 +30,7 @@ function Login () {
   const { formValues, formValid, handleChange } = useFormValidation(inputs)
 
   const handleMessage = (): MessageProps => {
-    if (!error) return { msg: '', type: 'success' }
+    if (!error) return { msg: message ?? '', type: 'success' }
     
     switch (error) {
       case 401:
@@ -58,6 +66,12 @@ function Login () {
     if (Cookies.get('Authorization')) navigate('/home')
   }, [data,navigate])
   
+
+  useEffect(() => {
+    if (email) {
+      handleChange(0, email)
+    }
+  }, [email])
  return (
    <>
      <Box>
@@ -69,20 +83,21 @@ function Login () {
            sx={{ alignItems: 'center', display: 'flex', height: '100vh' }}
          >
            <Container maxWidth="sm">
-            <Box sx={{ marginBottom: pxToRem(24)}}>
-              <Logo height={41} width={100}/>
-            </Box>
-             <Box sx={{ marginBottom: pxToRem(24)}}>
+             <Box sx={{ marginBottom: pxToRem(24) }}>
+               <Logo height={41} width={100} />
+             </Box>
+             <Box sx={{ marginBottom: pxToRem(24) }}>
                <StyledH1>Bem-vindo</StyledH1>
                <StyledP> Digite sua senha e email para logar</StyledP>
              </Box>
 
              <FormComponent
-               inputs={inputs.map((input, index)=> ({
-                  type: input.type,
-                  placeholder: input.placeholder,
-                  value: formValues[index] || '',
-                  onChange: (e: ChangeEvent<HTMLInputElement>) => handleChange(index, (e.target as HTMLInputElement).value)
+               inputs={inputs.map((input, index) => ({
+                 type: input.type,
+                 placeholder: input.placeholder,
+                 value: formValues[index] || '',
+                 onChange: (e: ChangeEvent<HTMLInputElement>) =>
+                   handleChange(index, (e.target as HTMLInputElement).value),
                }))}
                buttons={[
                  {
@@ -95,6 +110,7 @@ function Login () {
                ]}
                message={handleMessage()}
              />
+             <StyledP>Não possui conta? <Link to='/cadastro'>Cadastre-se</Link> </StyledP>
            </Container>
          </Grid>
          <Grid item sm={6} sx={{ display: { xs: 'none', sm: 'block' } }}>
