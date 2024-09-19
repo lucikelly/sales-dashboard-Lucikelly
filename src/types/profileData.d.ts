@@ -5,7 +5,6 @@ export interface ProfileEditableData {
 
 export interface ProfileData extends ProfileEditableData {
   email: string
-  
 }
 
 export interface CreateProfileData {

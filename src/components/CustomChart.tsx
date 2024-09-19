@@ -1,5 +1,5 @@
-import { useTheme } from "styled-components";
-import { 
+import { useTheme } from 'styled-components'
+import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
@@ -9,13 +9,11 @@ import {
   Title,
   Tooltip,
   Legend,
- 
-
 } from 'chart.js'
 
 import { Line } from 'react-chartjs-2'
 import { Bar } from 'react-chartjs-2'
-import { CustomChartProps } from "@/types";
+import { CustomChartProps } from '@/types'
 
 ChartJS.register(
   CategoryScale,
@@ -28,8 +26,8 @@ ChartJS.register(
   Legend
 )
 
-function CustomChart (props: CustomChartProps) {
-  const { data, labels, type} = props
+function CustomChart(props: CustomChartProps) {
+  const { data, labels, type } = props
   const theme = useTheme()
   const options = {
     responsive: true,
@@ -61,8 +59,8 @@ function CustomChart (props: CustomChartProps) {
     plugins: {
       legend: {
         display: false,
-      }
-    }
+      },
+    },
   }
   const chartData = {
     labels,
@@ -70,9 +68,9 @@ function CustomChart (props: CustomChartProps) {
       {
         data: data,
         borderColor: 'rgb(12, 112, 242)',
-        backgroundColor: 'rgba(12, 112, 242, 1)'
-      }
-    ]
+        backgroundColor: 'rgba(12, 112, 242, 1)',
+      },
+    ],
   }
   return type === 'bar' ? (
     <Bar options={options} data={chartData} />

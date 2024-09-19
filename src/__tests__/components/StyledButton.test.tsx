@@ -14,7 +14,6 @@ describe('StyledButton', () => {
 
   themesList.forEach(({ name, theme }) => {
     describe(`${name}`, () => {
-     
       it('should match the snapshot with alert class', () => {
         const { asFragment } = renderComponent(theme, 'alert')
         expect(asFragment()).toMatchSnapshot()
@@ -36,7 +35,6 @@ describe('StyledButton', () => {
         })
         expect(asFragment()).toMatchSnapshot()
       })
-
     })
   })
 })

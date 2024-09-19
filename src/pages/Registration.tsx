@@ -10,7 +10,7 @@ import { Box, Container, Grid } from '@mui/material'
 import { pxToRem } from '@/utils'
 import { ChangeEvent, useEffect } from 'react'
 import { useFormValidation, usePost } from '@/hooks'
-import { useDispatch,  useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/redux'
 import { setMessage, setProfileData } from '@/redux/slices/createProfile'
 import { CreateProfileData, InputProps } from '@/types'
@@ -21,12 +21,9 @@ function Registration() {
   const navigate = useNavigate()
   const { email } = useSelector((state: RootState) => state.createProfile)
 
-   const {
-     data,
-     loading,
-     error,
-     postData,
-   } = usePost<string, CreateProfileData>('profile/create')
+  const { data, loading, error, postData } = usePost<string, CreateProfileData>(
+    'profile/create'
+  )
 
   //FORM STEP 1
 
@@ -71,8 +68,8 @@ function Registration() {
 
   const handleStepInputs = email ? step2inputs : step1inputs
 
-  useEffect(()=> {
-    if(data !== null) {
+  useEffect(() => {
+    if (data !== null) {
       dispatch(setMessage('Usuário criado com sucesso.'))
       navigate('/')
     } else if (error) {
@@ -136,10 +133,12 @@ function Registration() {
                 buttons={[
                   {
                     className: 'primary',
-                    disabled: email ? !step2FormValid || loading : !step1FormValid,
+                    disabled: email
+                      ? !step2FormValid || loading
+                      : !step1FormValid,
                     onClick: email ? handleStep2 : handleStep1,
                     type: 'submit',
-                    children: email? 'Enviar ': ' Próximo',
+                    children: email ? 'Enviar ' : ' Próximo',
                   },
                 ]}
               />

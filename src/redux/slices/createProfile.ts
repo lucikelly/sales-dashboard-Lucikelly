@@ -1,5 +1,5 @@
-import { CreateProfileData } from "@/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CreateProfileData } from '@/types'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: Omit<CreateProfileData, 'name' | 'phone' | 'password'> = {
   email: '',
@@ -12,14 +12,16 @@ const profileSlice = createSlice({
   reducers: {
     setProfileData: (
       state,
-      action: PayloadAction< Omit<CreateProfileData, 'name' | 'phone' | 'password'>>
+      action: PayloadAction<
+        Omit<CreateProfileData, 'name' | 'phone' | 'password'>
+      >
     ) => {
       state.email = action.payload.email
-    }, 
+    },
     setMessage: (state, action: PayloadAction<string>) => {
       state.message = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { setProfileData, setMessage } = profileSlice.actions

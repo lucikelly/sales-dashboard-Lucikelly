@@ -1,9 +1,9 @@
 /**
- * convert Pixels to rem 
+ * convert Pixels to rem
  * @param pixels - Pixels value to be converted
- * @returns The converted rem valeu 
+ * @returns The converted rem valeu
  */
 
 export function pxToRem(pixels: number): string {
-  return `${pixels /16}rem`
+  return `${pixels / 16}rem`
 }

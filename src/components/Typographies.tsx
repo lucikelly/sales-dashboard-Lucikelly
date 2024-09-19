@@ -24,7 +24,6 @@ export const StyledH3 = styled.h2<TypographiesProps>`
   line-height: ${(props) => pxToRem(props.lineheight || 24)};
 `
 
-
 export const StyledP = styled.p<TypographiesProps>`
   color: ${(props) => props.color || 'inherit'};
   font-size: ${(props) => pxToRem(props.size || 16)};
@@ -46,6 +45,6 @@ export const StyledUl = styled.ul<TypographiesProps>`
   list-style-position: inside;
   li {
     list-style-position: outside;
-    margin-left: ${pxToRem(15)}
+    margin-left: ${pxToRem(15)};
   }
 `

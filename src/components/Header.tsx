@@ -11,7 +11,7 @@ const StyledHeader = styled.header`
   width: 100%;
 `
 
-function Header () {
+function Header() {
   return (
     <StyledHeader>
       <Container maxWidth="lg">
