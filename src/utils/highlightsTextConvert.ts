@@ -1,16 +1,16 @@
 /**
- * Converts text from highlight api 
+ * Converts text from highlight api
  * @param text - Text to be converted
  * @returns Converted text
  */
 
-export function highlightsTextConvert (text: string): string {
+export function highlightsTextConvert(text: string): string {
   switch (text) {
-    case 'alert': 
+    case 'alert':
       return '* Meta longe de ser batida'
-    case 'success': 
+    case 'success':
       return '* A meta do mês foi batida! Parabéns.'
-    case 'warning': 
+    case 'warning':
       return '* Falta pouco, vamos lá'
     default:
       return '* Sem dados no momento'

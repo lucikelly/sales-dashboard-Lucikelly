@@ -6,7 +6,7 @@ import {
   StyledH2,
   CustomTable,
   StyledSpan,
-  StyledP
+  StyledP,
 } from '@/components'
 
 import { Container, Grid } from '@mui/material'
@@ -14,10 +14,7 @@ import { useFormValidation, useGet, usePost, useDelete } from '@/hooks'
 import { InputProps, LeadsData, LeadsPostData, MessageProps } from '@/types'
 import { ChangeEvent, useState, useEffect } from 'react'
 
-
-
 function Leads() {
-
   const inputs: InputProps[] = [
     { name: 'name', type: 'text', placeholder: 'Nome', required: true },
     { name: 'email', type: 'email', placeholder: 'Email', required: true },
@@ -33,13 +30,12 @@ function Leads() {
       email: String(formValues[1]),
       phone: String(formValues[2]),
     })
-    
   }
 
   const handleDelete = async (id: number) => {
-    if( confirm('Tem certeza que deseja excluir seu lead')) {
+    if (confirm('Tem certeza que deseja excluir seu lead')) {
       try {
-        await leadsDeleteData({params: {id: id}})
+        await leadsDeleteData({ params: { id: id } })
         alert('Lead deletado com sucesso!')
         getLeads()
       } catch (e) {
@@ -51,11 +47,11 @@ function Leads() {
   }
 
   const {
-    data: createLeadsData, 
-    loading: createLeadsLoading,  
-    error: createLeadsError, 
+    data: createLeadsData,
+    loading: createLeadsLoading,
+    error: createLeadsError,
     postData: createLeadsPostData,
-  } =  usePost<LeadsData, LeadsPostData>('leads/create', true)
+  } = usePost<LeadsData, LeadsPostData>('leads/create', true)
 
   const {
     data: leadsData,
@@ -64,42 +60,40 @@ function Leads() {
     getData: getLeads,
   } = useGet<LeadsData[]>('leads')
 
-  const {
-    deleteData: leadsDeleteData,
-    loading: leadsDeleteLoading,
-  } = useDelete('leads/delete')
+  const { deleteData: leadsDeleteData, loading: leadsDeleteLoading } =
+    useDelete('leads/delete')
 
-  const [createMessage, setCreateMessage] = useState <MessageProps>({
-    type:'success',
-    msg: ''
+  const [createMessage, setCreateMessage] = useState<MessageProps>({
+    type: 'success',
+    msg: '',
   })
 
   const clearMessage = () => {
     setTimeout(() => {
       setCreateMessage({
         type: 'success',
-        msg:'',
+        msg: '',
       })
-    },3000)
+    }, 3000)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     if (createLeadsData?.id) {
-      setCreateMessage ({
+      setCreateMessage({
         msg: 'Lead criado com sucesso',
-        type:'success'
+        type: 'success',
       })
       getLeads()
       clearMessage()
     } else if (createLeadsError) {
-      setCreateMessage ({
+      setCreateMessage({
         msg: 'Não foi possível realizar a operação. Entre em contato com nosso suporte',
-        type:'error'
+        type: 'error',
       })
     } else {
       clearMessage()
     }
-  },[createLeadsData, createLeadsError])
+  }, [createLeadsData, createLeadsError])
 
   return (
     <>

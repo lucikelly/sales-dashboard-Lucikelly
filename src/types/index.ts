@@ -12,4 +12,3 @@ export * from './starsData'
 export * from './newsData'
 export * from './profileData'
 export * from './leadsData'
-

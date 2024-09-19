@@ -1,8 +1,7 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 import { StyledButton, StyledInput } from '@/components'
-import { FormComponentProps } from "@/types";
-import { pxToRem } from '@/utils';
-
+import { FormComponentProps } from '@/types'
+import { pxToRem } from '@/utils'
 
 export const StyledForm = styled.form`
   display: flex;
@@ -10,8 +9,8 @@ export const StyledForm = styled.form`
   row-gap: ${pxToRem(16)};
 `
 
-function FormComponent (props: FormComponentProps) {
-  const { inputs, buttons, message} = props
+function FormComponent(props: FormComponentProps) {
+  const { inputs, buttons, message } = props
   return (
     <StyledForm>
       {inputs.map((inputProps, index) => (

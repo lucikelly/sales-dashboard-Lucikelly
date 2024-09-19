@@ -1,26 +1,36 @@
-import { Header, CardComponent, FormComponent, StyledButton, StyledH2 } from '@/components'
+import {
+  Header,
+  CardComponent,
+  FormComponent,
+  StyledButton,
+  StyledH2,
+} from '@/components'
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { AppThemeContext } from '@/contexts/AppThemeContext'
 import { Container, Grid } from '@mui/material'
 import { logout } from '@/services'
-import { InputProps, ProfileData, ProfileEditableData, MessageProps } from '@/types'
+import {
+  InputProps,
+  ProfileData,
+  ProfileEditableData,
+  MessageProps,
+} from '@/types'
 import { useFormValidation, useGet, usePut, useDelete } from '@/hooks'
 import Cookies from 'js-cookie'
-
 
 function Profile() {
   const themeContext = useContext(AppThemeContext)
 
   const [updateMessage, setUpdateMessage] = useState<MessageProps>({
     type: 'success',
-    msg:''
+    msg: '',
   })
 
   const clearMessage = () => {
     setTimeout(() => {
       setUpdateMessage({
         type: 'success',
-        msg:'',
+        msg: '',
       })
     }, 3000)
   }
@@ -38,22 +48,16 @@ function Profile() {
     error: profileUpdateError,
   } = usePut<ProfileEditableData>('profile/update')
 
-   const {
-     deleteData: profileDeleteData, 
-     loading: profileDeleteLoading
-    
-   } = useDelete('profile/delete')
+  const { deleteData: profileDeleteData, loading: profileDeleteLoading } =
+    useDelete('profile/delete')
 
-
-
-  useEffect(()=>{
-    if(profileData) {
+  useEffect(() => {
+    if (profileData) {
       handleChange(0, profileData.name),
         handleChange(1, profileData.email),
         handleChange(2, profileData.phone)
     }
   }, [profileData])
-
 
   const inputs: InputProps[] = [
     { name: 'name', type: 'text', placeholder: 'Nome', required: true },
@@ -66,12 +70,16 @@ function Profile() {
     e.preventDefault()
     await profilePutData({
       name: String(formValues[0]),
-      phone: String(formValues[2])
+      phone: String(formValues[2]),
     })
   }
 
   const handleDelete = async () => {
-    if( confirm('Tem certeza que deseja excluir sua conta? se sim, certifique-se de deletar os seus leads antes.')) {
+    if (
+      confirm(
+        'Tem certeza que deseja excluir sua conta? se sim, certifique-se de deletar os seus leads antes.'
+      )
+    ) {
       try {
         await profileDeleteData()
         alert('Perfil deletado com sucesso!')
@@ -85,25 +93,20 @@ function Profile() {
     }
   }
 
-
-  useEffect(()=>{
-    if(profileUpdateData !== null) {
+  useEffect(() => {
+    if (profileUpdateData !== null) {
       setUpdateMessage({
         msg: 'Perfil Atualizado com sucesso',
-        type: 'success'
+        type: 'success',
       })
-      
-    } else if (profileUpdateError){
-       setUpdateMessage({
-         msg: 'Não foi possível realizar a operação. Entre em contato com nosso suporte',
-         type: 'error',
-       })
+    } else if (profileUpdateError) {
+      setUpdateMessage({
+        msg: 'Não foi possível realizar a operação. Entre em contato com nosso suporte',
+        type: 'error',
+      })
     }
-      clearMessage()
-   
-
-
-  },[profileUpdateData, profileUpdateError])
+    clearMessage()
+  }, [profileUpdateData, profileUpdateError])
 
   return (
     <>

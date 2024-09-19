@@ -6,8 +6,7 @@ const axiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_API_BASE_URL}/`,
 })
 
-
-export const useGet = <T> (endpoint: string, config?: AxiosRequestConfig) => {
+export const useGet = <T>(endpoint: string, config?: AxiosRequestConfig) => {
   const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<number | null>(null)
@@ -19,9 +18,9 @@ export const useGet = <T> (endpoint: string, config?: AxiosRequestConfig) => {
     try {
       const response = await axiosInstance({
         url: endpoint,
-        method: 'GET', 
+        method: 'GET',
         headers: {
-          'Authorization': `Bearer ${Cookies.get('Authorization')}`,
+          Authorization: `Bearer ${Cookies.get('Authorization')}`,
           ...config?.headers,
         },
         ...config,
@@ -40,8 +39,6 @@ export const useGet = <T> (endpoint: string, config?: AxiosRequestConfig) => {
 
   return { data, loading, error, getData }
 }
-
-
 
 export const usePost = <T, P>(endpoint: string, withAuth?: boolean) => {
   const [data, setData] = useState<T | null>(null)
@@ -118,12 +115,10 @@ export const usePut = <T>(endpoint: string) => {
 export const useDelete = <T>(endpoint: string) => {
   const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState(false)
- 
 
   const deleteData = async (config?: AxiosRequestConfig) => {
     setData(null)
     setLoading(true)
-
 
     try {
       const response = await axiosInstance({
@@ -143,8 +138,5 @@ export const useDelete = <T>(endpoint: string) => {
     }
   }
 
-  return { data, loading,  deleteData }
+  return { data, loading, deleteData }
 }
-
-
-

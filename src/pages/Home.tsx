@@ -8,14 +8,13 @@ import {
   StyledH3,
   StyledSpan,
 } from '@/components'
-import { Container, Grid } from "@mui/material"
-import { currencyConverter, highlightsTextConvert } from "@/utils"
-import { useGet } from "@/hooks"
-import { HighlightsData, StarsData, NewsData, CustomChartProps } from "@/types"
+import { Container, Grid } from '@mui/material'
+import { currencyConverter, highlightsTextConvert } from '@/utils'
+import { useGet } from '@/hooks'
+import { HighlightsData, StarsData, NewsData, CustomChartProps } from '@/types'
 import { Link } from 'react-router-dom'
 
-
-function Home () {
+function Home() {
   const {
     data: highlightsData,
     loading: highlightsLoading,
@@ -39,17 +38,13 @@ function Home () {
     loading: newsLoading,
     error: newsError,
   } = useGet<NewsData[]>('news')
- 
 
   const {
     data: salesYearData,
     loading: salesYearLoading,
     error: salesYearError,
   } = useGet<CustomChartProps>('sales/year')
- 
 
-
- 
   return (
     <>
       <Header />
@@ -81,7 +76,7 @@ function Home () {
               </Grid>
               <Grid item xs={12} md={4}>
                 <CardComponent
-                  id='month-goals'
+                  id="month-goals"
                   className={
                     highlightsData
                       ? highlightsData[1].subtitle
@@ -111,7 +106,7 @@ function Home () {
               </Grid>
               <Grid item xs={12} md={4}>
                 <CardComponent
-                  id='total-leads'
+                  id="total-leads"
                   className={
                     highlightsLoading
                       ? 'skeleton-loading skeleton-loading-mh-1'
@@ -119,18 +114,13 @@ function Home () {
                   }
                 >
                   {!highlightsLoading && highlightsData && (
-                   
-                      <Link to="/leads">
-                        <StyledH2 className="mb-1">
-                          {' '}
-                          Leads contactados{' '}
-                        </StyledH2>
-                        <StyledH3 className="mb-1" size={40} lineheight={40}>
-                          {highlightsData[2].value}
-                        </StyledH3>
-                        <StyledSpan>{highlightsData[2].subtitle}</StyledSpan>
-                      </Link>
-                   
+                    <Link to="/leads">
+                      <StyledH2 className="mb-1"> Leads contactados </StyledH2>
+                      <StyledH3 className="mb-1" size={40} lineheight={40}>
+                        {highlightsData[2].value}
+                      </StyledH3>
+                      <StyledSpan>{highlightsData[2].subtitle}</StyledSpan>
+                    </Link>
                   )}
                 </CardComponent>
               </Grid>
@@ -140,7 +130,7 @@ function Home () {
           <Grid item xs={12} md={7}>
             {!salesMonthError && (
               <CardComponent
-                id='month-sales-chart'
+                id="month-sales-chart"
                 className={
                   salesMonthLoading
                     ? 'skeleton-loading skeleton-loading-mh-1'
@@ -167,7 +157,7 @@ function Home () {
           <Grid item xs={12} md={5}>
             {!salesStarsError && (
               <CardComponent
-                id='sales-stars'
+                id="sales-stars"
                 className={
                   salesStarsLoading
                     ? 'skeleton-loading skeleton-loading-mh-1'
@@ -195,7 +185,7 @@ function Home () {
           <Grid item xs={12} md={5}>
             {!newsError && (
               <CardComponent
-                id='news'
+                id="news"
                 className={
                   newsLoading ? 'skeleton-loading skeleton-loading-mh-1' : ''
                 }
@@ -226,7 +216,7 @@ function Home () {
           <Grid item xs={12} md={7}>
             {!salesYearError && (
               <CardComponent
-                id='year-sales-chart'
+                id="year-sales-chart"
                 className={
                   salesYearLoading
                     ? 'skeleton-loading skeleton-loading-mh-1'

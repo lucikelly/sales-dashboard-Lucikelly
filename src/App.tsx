@@ -1,6 +1,12 @@
-import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from "react-router-dom"
-import Cookies from "js-cookie"
-import { Home, Login, Registration, Leads, Profile } from "./pages"
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+  Outlet,
+} from 'react-router-dom'
+import Cookies from 'js-cookie'
+import { Home, Login, Registration, Leads, Profile } from './pages'
 
 function App() {
   const ProtectedRoute = () => {
@@ -12,7 +18,6 @@ function App() {
 
     return <Outlet />
   }
-
 
   return (
     <>

@@ -1,5 +1,5 @@
 export interface CustomChartProps {
-  labels: string []
-  data: number []
+  labels: string[]
+  data: number[]
   type: 'line' | 'bar'
 }

@@ -1,19 +1,21 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
-import { ThemeProvider } from "styled-components";
-import { darkTheme, lighTheme } from "@/styles";
-import { AppThemeContextProps } from "@/types";
+import { createContext, useState, useEffect, ReactNode } from 'react'
+import { ThemeProvider } from 'styled-components'
+import { darkTheme, lighTheme } from '@/styles'
+import { AppThemeContextProps } from '@/types'
 
-export const AppThemeContext = createContext<AppThemeContextProps | undefined> (undefined)
+export const AppThemeContext = createContext<AppThemeContextProps | undefined>(
+  undefined
+)
 
-export  const AppThemeProvaider = ({children}: {children: ReactNode}) => {
+export const AppThemeProvaider = ({ children }: { children: ReactNode }) => {
   const savedTheme = localStorage.getItem('theme')
-  const [appTheme, setAppTheme] = useState(savedTheme?? 'light')
+  const [appTheme, setAppTheme] = useState(savedTheme ?? 'light')
 
-  const toggleTheme =() => {
-    setAppTheme((prevTheme)=>( prevTheme === 'light' ? 'dark' : 'light'))
+  const toggleTheme = () => {
+    setAppTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     localStorage.setItem('theme', appTheme)
   })
 
