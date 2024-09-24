@@ -1,3 +1,13 @@
+# Plataforma de dashboard
+
+
+Deploy da aplicação: https://sales-dashboard-lucikelly-128l.vercel.app/
+
+A plataforma de dashboard permite que usuários se registrem, façam login e logout, e interajam com os dados 
+exibidos a partir de uma API conectada a um banco de dados. Os usuários podem alternar o tema da aplicação, 
+visualizar dados, e gerenciar leads ao criar, deletar ou modificar informações. Além disso, os usuários logados
+podem atualizar seus dados pessoais e até excluir suas contas da aplicação.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
